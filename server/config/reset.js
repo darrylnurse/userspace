@@ -8,7 +8,7 @@ const createEventsTable = async () => {
 
         CREATE TABLE IF NOT EXISTS events (
             id SERIAL PRIMARY KEY,
-            url VARCHAR(255) NOT NULL,
+            url VARCHAR(255),
             title VARCHAR(255) NOT NULL,
             time VARCHAR(255) NOT NULL,
             location VARCHAR(255) NOT NULL,
@@ -40,9 +40,9 @@ const seedEventsTable = async () => {
         event.dressCode
     ];
 
-    pool.query(insertQuery, values, (error, res) => {
+    pool.query(insertQuery, values, (error, _) => {
       if (error) {
-        console.error(`Error inserting photo: ${event.title}`, error);
+        console.error(`Error inserting event: ${event.title}`, error);
         return;
       }
       console.log(`${event.title} inserted successfully.`);

@@ -1,17 +1,23 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import getEvents from "../controllers/allEvents.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import {
+  getEvents,
+  getEventById,
+  createEvent,
+  updateEvent,
+  deleteEvent
+} from "../controllers/eventsControl.js";
 
 const router = express.Router();
 
 router.get('/', getEvents);
 
-router.get('/:eventId', (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, "../../public/events.html"));
-});
+router.get('/:eventId', getEventById);
+
+router.post('/', createEvent);
+
+router.patch('/:id', updateEvent);
+
+router.delete('/:id', deleteEvent);
+
 
 export default router;
